@@ -1,12 +1,16 @@
+// Requiring necessary npm packages
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
 
-const PORT = 3000;
+// Setting up PORT for Heroku connection
+const PORT = process.env.PORT || 3000;
 
+// Creating and setting up express
 const app = express();
 
+// Viewing terminal connection statuses
 app.use(logger("dev"));
 
 app.use(compression());
@@ -15,14 +19,20 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
+// Connecting to MongoDB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
 
-// routes
+// Requiring Routes
 app.use(require("./routes/api.js"));
 
+// Start Server
 app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
+  console.log(
+    "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+    PORT,
+    PORT
+  );
 });
