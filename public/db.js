@@ -1,6 +1,6 @@
 let db;
 // Creates a "budget" database from a new db request
-const request = indexedDb.open( "budget", 1 );
+const request = indexedDB.open( "budget", 1 );
 
 // Create object store called "pending" and set autoIncrement to true
 request.onupgradeneeded = function( event ) {
@@ -31,7 +31,7 @@ function saveRecord( record ) {
 
   // Add transaction record to your store with add method.
   store.add( record );
-}
+};
 
 function checkDatabase() {
   // Open a transaction on the "pending" db with "readwrite" access
@@ -47,7 +47,7 @@ function checkDatabase() {
     if ( getAll.result.length > 0 ) {
       fetch( "api/transaction/bulk", {
         method: "POST",
-        body: JSON.stringify(getAll.result),
+        body: JSON.stringify( getAll.result ),
         headers: {
           Accept: "application/json, text/plain, */*", "Content-Type": "application/json"
         }
@@ -55,7 +55,7 @@ function checkDatabase() {
       .then( response => response.json() )
       .then( () => {
         // If successful, open a transaction on your "pending" db
-        const transaction = db.tranasaction( ["pending"], "readwrite" );
+        const transaction = db.transaction( ["pending"], "readwrite" );
 
         // Access your "pending" object store
         const store = transaction.objectStore("pending");
