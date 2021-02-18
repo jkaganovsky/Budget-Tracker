@@ -20,13 +20,13 @@ FEATURES
 ## Content
 DEMO
 
-![HTML gif]()
+![HTML gif](./public/assets/images/budget-tracker.gif)
 
 
 
 ## Credits
-1.
-
+1. My fellow bootcamp Full Stack Web Developer, Elizabeth Brandt - https://github.com/elizabethbrandt
+1. Prior class activity review from UW Coding Bootcamp via Trilogy
 
 ## License
 MIT License
